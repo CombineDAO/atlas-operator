@@ -46,7 +46,7 @@ jobs:
         run: helm package atlas-operator
       - name: login to gcr using helm
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | helm registry login ghcr.io/ariga/atlas-operator --username ${{ github.repository_owner }} --password-stdin
+          helm registry login ${{ secrets.REPO_REGISTRY_URL}} --username ${{ secrets.REPO_REGISTRY_USERNAME }} --password ${{ secrets.REPO_REGISTRY_PASSWORD }}
       - name: helm push
         run: |
-          helm push atlas-operator-${{ steps.version.outputs.CHART_VERSION }}.tgz oci://ghcr.io/ariga/charts
+          helm push atlas-operator-${{ steps.version.outputs.CHART_VERSION }}.tgz ${{ secrets.REGISTRY_OCI_CHARTS_URL}}

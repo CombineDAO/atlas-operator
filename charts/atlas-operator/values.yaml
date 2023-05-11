@@ -37,6 +37,13 @@ service:
   type: ClusterIP
   port: 80
 
+volumes:
+  name: certificates-vol
+  mountPath: /tmp/certificates
+  secretName: cockroachdb.client.root
+  secretKey: ca.crt
+  secretPath: ca.crt
+
 resources: {}
 
 nodeSelector: {}
