@@ -21,7 +21,7 @@ jobs:
           kubectl apply -k config/integration
       - name: wait for test resources
         run: |
-          if ! kubectl wait --for=condition=ready --timeout=120s atlasschemas --all; then
+          if ! kubectl wait --for=condition=ready --timeout=240s atlasschemas --all; then
             kubectl describe atlasschemas
             kubectl describe pods -l atlasgo.io/engine=postgres
             kubectl describe pods -l atlasgo.io/engine=mysql
